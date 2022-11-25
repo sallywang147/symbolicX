@@ -4,7 +4,7 @@ import tempfile
 import yaml
 import argparse
 from typing import Dict, Final, List, Optional, Tuple, Union
-
+import maat
 from maat import Cst, EVMTransaction, Value, Var, VarContext
 
 from common.abi import function_call

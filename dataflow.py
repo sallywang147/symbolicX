@@ -1,9 +1,10 @@
+import fire
 from typing import List, Optional, Set
-
+from slither import Slither
+from solc_select import solc_select
 from slither.core.declarations.function import Function
 from slither.printers.guidance.echidna import _extract_function_relations
-from slither.slither import SlitherCore
-
+from slither.core.slither_core import SlitherCore
 from common.exceptions import DataflowException
 
 
@@ -22,7 +23,7 @@ class DataflowNode:
         self.parents: Set[DataflowNode] = set()
 
     def __str__(self) -> str:
-        res = f"{self.func.name}:"
+        res = f"{self.func}:"
         res += f"\tImpacts: {', '.join([c.func.name for c in self.children])}"
         res += (
             f"\tImpacted by: {', '.join([p.func.name for p in self.parents])}"
@@ -84,7 +85,7 @@ def ignore_func(func: Function) -> bool:
 
 
 def get_base_dataflow_graph(
-    contract_name: str, slither: SlitherCore
+  #  contract_name: str, slither: SlitherCore
 ) -> DataflowGraph:
     """Use slither to return the basic dataflow graph for a given contract
 
@@ -93,6 +94,9 @@ def get_base_dataflow_graph(
         target contract
     """
     res = DataflowGraph()
+    solc_select.switch_global_version("0.6.12", always_install=True)
+    slither = Slither("/Users/sallywang/symbolicX/test.sol")
+    contract_name='TestFunction'
     rels = _extract_function_relations(slither)
     rels = rels[contract_name]  # TODO KeyError
 
@@ -109,8 +113,8 @@ def get_base_dataflow_graph(
     for func, deps in rels.items():
         # Add all function dependencies
         func = contract.get_function_from_signature(func)
-        if ignore_func(func):
-            continue
+     #   if ignore_func(func):
+     #       continue
         res.add_function(func)
         for dst in deps["impacts"]:
             dst = contract.get_function_from_signature(dst)
@@ -124,5 +128,6 @@ def get_base_dataflow_graph(
                 continue
             res.add_function(src)
             res.add_dataflow(src, func)
-
     return res
+
+#print(get_base_dataflow_graph())

@@ -13,15 +13,14 @@ from maat import (
     VarContext,
 )
 
-from .display import display
-from .interface import load_tx_sequence, store_new_tx_sequence
+from display import display
+from interface import load_tx_sequence, store_new_tx_sequence
 from common.logger import logger
 from common.world import AbstractTx, EVMWorld
 from coverage import Coverage
 from common.exceptions import EchidnaException, WorldException
 
 
-# TODO(boyan): pass contract bytecode instead of extracting to file
 def replay_inputs(
     corpus_files: List[str],
     contract_file: str,
