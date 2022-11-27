@@ -5,7 +5,7 @@ import yaml
 import argparse
 import fire
 from typing import Dict, Final, List, Optional, Tuple, Union
-from slither.core.declarations.function import Function
+from function import Function
 from  maat import Value
 from slither.slither import SlitherCore
 #from common.abi import func_signature
@@ -98,11 +98,14 @@ class CorpusGenerator:
         res = f"Dataflow graph:\n {self.dataflow_graph}\n"
         res += "Current tx sequences:\n"
         for i, tx_seq in enumerate(self.current_tx_sequences):
-            res += (
-                f"{i}: "
-                + " -> ".join([node.func.name for node in tx_seq])
-                + "\n"
-            )
+            for node in tx_seq: 
+                if node.func is not None:
+                    res += (
+                        f"{i}: "
+                        #print(typeof(node.func))
+                        + " -> ".join(node.func.name)
+                        + "\n"
+                    )
         return res
         
 def invoke_str()-> CorpusGenerator:
@@ -305,9 +308,3 @@ def infer_previous_incremental_threshold(corpus_dir: str) -> int:
             res = max(res, len(data))
 
     return res
-
-def invoke_str()-> EchidnaCorpusGenerator:
-    res= EchidnaCorpusGenerator(CorpusGenerator())
-    output = res.dump_tx_sequences('file.txt')
-    print(output)
-print(invoke_str())

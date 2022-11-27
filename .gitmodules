@@ -1,0 +1,6 @@
+[submodule "maat"]
+	path = maat
+	url = https://github.com/trailofbits/maat.git
+[submodule "common/maat"]
+	path = common/maat
+	url = https://github.com/trailofbits/maat.git

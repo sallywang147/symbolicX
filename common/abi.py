@@ -5,9 +5,8 @@ import sha3
 from eth_abi.exceptions import ABITypeError, ParseError
 from eth_abi.grammar import ABIType, BasicType, TupleType, parse, normalize
 from maat import Cst, Sext, Value, Var, VarContext
-
-from .exceptions import ABIException
-from .logger import logger
+from common.exceptions import ABIException
+from common.logger import logger
 from common.util import list_has_types
 
 # =========

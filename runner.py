@@ -17,7 +17,7 @@ from display import display
 from interface import load_tx_sequence, store_new_tx_sequence
 from common.logger import logger
 from common.world import AbstractTx, EVMWorld
-from coverage import Coverage
+from coverage.coverage import Coverage
 from common.exceptions import EchidnaException, WorldException
 
 

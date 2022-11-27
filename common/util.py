@@ -7,7 +7,7 @@ import rlp
 import sha3
 
 
-from .exceptions import GenericException
+from common.exceptions import GenericException
 
 
 def twos_complement_convert(arg: int, bits: int) -> int:
