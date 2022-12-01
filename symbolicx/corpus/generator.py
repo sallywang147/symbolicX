@@ -18,7 +18,7 @@ from ..echidna.interface import (
 )
 
 # Prefix for files containing seed corpus
-SEED_CORPUS_PREFIX: Final[str] = "optik_corpus"
+SEED_CORPUS_PREFIX: Final[str] = "symbolic_corpus"
 
 # TODO: remove?
 # import itertools
