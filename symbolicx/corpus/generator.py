@@ -12,7 +12,7 @@ from ..dataflow.dataflow import (
     DataflowNode,
     get_base_dataflow_graph,
 )
-from ..echidna.interface import (
+from ..executor.interface import (
     extract_func_from_call,
     get_available_filename,
 )
