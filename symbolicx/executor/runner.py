@@ -20,8 +20,6 @@ from ..common.world import AbstractTx, EVMWorld
 from ..coverage import Coverage
 from ..common.exceptions import EchidnaException, WorldException
 
-
-# TODO(boyan): pass contract bytecode instead of extracting to file
 def replay_inputs(
     corpus_files: List[str],
     contract_file: str,
@@ -42,7 +40,6 @@ def replay_inputs(
         )
 
         tx_seq = load_tx_sequence(corpus_file)
-        # TODO(boyan): implement snapshoting in EVMWorld so we don't
         # recreate the whole environment for every input
         # WARNING: if we end up keeping the same EVMWorld, it will mess with
         # some of the Coverage classes that rely on on_attach(). We'll probably
